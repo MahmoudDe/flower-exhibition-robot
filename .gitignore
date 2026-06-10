@@ -12,5 +12,5 @@ venv/
 .vscode/
 .cursor/
 
-# Assignment PDF (keep local only)
-docs/
+# Assignment PDF (keep local only; markdown docs are tracked)
+docs/*.pdf
