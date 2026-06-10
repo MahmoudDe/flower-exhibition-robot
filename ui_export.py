@@ -1,6 +1,7 @@
 import json
 
-from domain import EMPTY_LOAD, HEIGHT, ITEMS, MAX_LOAD, START, TARGETS, WAREHOUSE, WIDTH
+from domain import EMPTY_LOAD, HEIGHT, INITIAL_REMAINING, ITEM_POSITIONS, ITEMS, MAX_LOAD, START, TARGETS, WAREHOUSE, WIDTH
+from heuristic import heuristic
 from utils import choose, sub_tuple
 
 
@@ -76,8 +77,25 @@ def next_state(action, pos, cost, cargo, delivered):
     return new_pos, new_cost, new_cargo, new_delivered
 
 
+def remaining_counts(delivered):
+    return tuple(map(lambda pair: pair[0] - pair[1], zip(INITIAL_REMAINING, delivered)))
+
+
 def state_row(label, pos, cost, cargo, delivered):
-    return {"label": label, "pos": list(pos), "cost": cost, "cargo": list(cargo), "delivered": list(delivered)}
+    remaining = remaining_counts(delivered)
+    cargo_tuple = tuple(cargo)
+    h = heuristic(tuple(pos), remaining, cargo_tuple, ITEM_POSITIONS)
+    return {
+        "label": label,
+        "pos": list(pos),
+        "cost": cost,
+        "h": h,
+        "f": cost + h,
+        "cargo": list(cargo),
+        "delivered": list(delivered),
+        "remaining": list(remaining),
+        "isGoal": (sum(remaining) == 0) and (sum(cargo_tuple) == 0),
+    }
 
 
 def replay_rows(actions, pos=START, cost=0, cargo=EMPTY_LOAD, delivered=EMPTY_LOAD, label="Initial state"):
@@ -107,6 +125,9 @@ def export_payload(result):
         "start": list(START),
         "maxLoad": MAX_LOAD,
         "optimalCost": result.node.g,
+        "searchStrategy": "A* (Experta rules, f = g + h)",
+        "generatedTotal": len(result.generated),
+        "solutionPath": list(result.node.path),
         "items": item_rows(ITEMS),
         "targets": target_rows(TARGETS),
         "states": states,
