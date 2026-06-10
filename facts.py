@@ -1,7 +1,6 @@
 from experta import Fact
 
 
-# Fact names used by the Experta rule engine.
 class Grid(Fact):
     pass
 
@@ -22,10 +21,6 @@ class Need(Fact):
     pass
 
 
-class Cargo(Fact):
-    pass
-
-
 class LoadBatch(Fact):
     pass
 
@@ -39,4 +34,24 @@ class Violation(Fact):
 
 
 class Goal(Fact):
+    pass
+
+
+class CurrentState(Fact):
+    pass
+
+
+class GeneratedState(Fact):
+    pass
+
+
+class TreeLine(Fact):
+    pass
+
+
+class Solution(Fact):
+    pass
+
+
+class SearchConfig(Fact):
     pass

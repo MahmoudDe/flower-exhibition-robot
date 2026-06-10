@@ -234,78 +234,18 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "arrive Warehouse",
-      "pos": [
-        3,
-        2
-      ],
-      "cost": 2,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "label": "load Pavilion 2:Tulip:redx3, Pavilion 2:Tulip:yellowx1",
+      "label": "load Pavilion 1:Rose:redx2, Pavilion 1:Rose:pinkx1, Pavilion 1:Rose:whitex1",
       "pos": [
         3,
         2
       ],
       "cost": 3,
       "cargo": [
-        0,
-        0,
-        0,
-        3,
+        2,
+        1,
         1,
         0,
         0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "label": "move-right",
-      "pos": [
-        4,
-        2
-      ],
-      "cost": 4,
-      "cargo": [
-        0,
-        0,
-        0,
-        3,
-        1,
         0,
         0,
         0,
@@ -326,16 +266,16 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-up",
       "pos": [
-        4,
+        3,
         3
       ],
-      "cost": 5,
+      "cost": 4,
       "cargo": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -354,18 +294,18 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "arrive Pavilion 2",
+      "label": "move-up",
       "pos": [
-        4,
-        3
+        3,
+        4
       ],
       "cost": 5,
       "cargo": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -377,36 +317,6 @@ window.FLOWER_ROBOT_DATA = {
         0,
         0,
         0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "label": "unload Pavilion 2:Tulip:redx3, Pavilion 2:Tulip:yellowx1",
-      "pos": [
-        4,
-        3
-      ],
-      "cost": 6,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
         0,
         0,
         0,
@@ -416,8 +326,38 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-left",
       "pos": [
-        3,
-        3
+        2,
+        4
+      ],
+      "cost": 6,
+      "cargo": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "delivered": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "unload Pavilion 1:Rose:redx2, Pavilion 1:Rose:pinkx1, Pavilion 1:Rose:whitex1",
+      "pos": [
+        2,
+        4
       ],
       "cost": 7,
       "cargo": [
@@ -432,11 +372,71 @@ window.FLOWER_ROBOT_DATA = {
         0
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "move-right",
+      "pos": [
+        3,
+        4
+      ],
+      "cost": 8,
+      "cargo": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "delivered": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "move-down",
+      "pos": [
+        3,
+        3
+      ],
+      "cost": 9,
+      "cargo": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "delivered": [
+        2,
+        1,
+        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -449,7 +449,7 @@ window.FLOWER_ROBOT_DATA = {
         3,
         2
       ],
-      "cost": 8,
+      "cost": 10,
       "cargo": [
         0,
         0,
@@ -462,41 +462,11 @@ window.FLOWER_ROBOT_DATA = {
         0
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
+        1,
         1,
         0,
         0,
-        0,
-        0
-      ]
-    },
-    {
-      "label": "arrive Warehouse",
-      "pos": [
-        3,
-        2
-      ],
-      "cost": 8,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
         0,
         0,
         0,
@@ -509,7 +479,7 @@ window.FLOWER_ROBOT_DATA = {
         3,
         2
       ],
-      "cost": 9,
+      "cost": 11,
       "cargo": [
         0,
         0,
@@ -522,11 +492,11 @@ window.FLOWER_ROBOT_DATA = {
         2
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -539,7 +509,7 @@ window.FLOWER_ROBOT_DATA = {
         4,
         2
       ],
-      "cost": 10,
+      "cost": 12,
       "cargo": [
         0,
         0,
@@ -552,11 +522,11 @@ window.FLOWER_ROBOT_DATA = {
         2
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -569,7 +539,7 @@ window.FLOWER_ROBOT_DATA = {
         5,
         2
       ],
-      "cost": 11,
+      "cost": 13,
       "cargo": [
         0,
         0,
@@ -582,41 +552,11 @@ window.FLOWER_ROBOT_DATA = {
         2
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "label": "arrive Pavilion 4",
-      "pos": [
-        5,
-        2
-      ],
-      "cost": 11,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         2,
-        2
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         0,
@@ -629,7 +569,7 @@ window.FLOWER_ROBOT_DATA = {
         5,
         2
       ],
-      "cost": 12,
+      "cost": 14,
       "cargo": [
         0,
         0,
@@ -642,11 +582,11 @@ window.FLOWER_ROBOT_DATA = {
         0
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         2,
@@ -659,101 +599,11 @@ window.FLOWER_ROBOT_DATA = {
         4,
         2
       ],
-      "cost": 13,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
-      "label": "move-left",
-      "pos": [
-        3,
-        2
-      ],
-      "cost": 14,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
-      "label": "arrive Warehouse",
-      "pos": [
-        3,
-        2
-      ],
-      "cost": 14,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
-      "label": "load Pavilion 1:Rose:redx2, Pavilion 1:Rose:pinkx1, Pavilion 1:Rose:whitex1",
-      "pos": [
-        3,
-        2
-      ],
       "cost": 15,
       "cargo": [
-        2,
-        1,
-        1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -762,11 +612,11 @@ window.FLOWER_ROBOT_DATA = {
         0
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         2,
@@ -776,14 +626,14 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-left",
       "pos": [
-        2,
+        3,
         2
       ],
       "cost": 16,
       "cargo": [
-        2,
-        1,
-        1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -792,11 +642,11 @@ window.FLOWER_ROBOT_DATA = {
         0
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         2,
@@ -804,29 +654,29 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "move-up",
+      "label": "load Pavilion 2:Tulip:redx3, Pavilion 2:Tulip:yellowx1",
       "pos": [
-        2,
-        3
+        3,
+        2
       ],
       "cost": 17,
       "cargo": [
-        2,
-        1,
-        1,
         0,
         0,
+        0,
+        3,
+        1,
         0,
         0,
         0,
         0
       ],
       "delivered": [
-        0,
-        0,
-        0,
-        3,
+        2,
         1,
+        1,
+        0,
+        0,
         0,
         0,
         2,
@@ -836,76 +686,16 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-up",
       "pos": [
-        2,
-        4
+        3,
+        3
       ],
       "cost": 18,
       "cargo": [
-        2,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
         0,
         0,
         0,
         3,
         1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
-      "label": "arrive Pavilion 1",
-      "pos": [
-        2,
-        4
-      ],
-      "cost": 18,
-      "cargo": [
-        2,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        0,
-        0,
-        0,
-        3,
-        1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
-      "label": "unload Pavilion 1:Rose:redx2, Pavilion 1:Rose:pinkx1, Pavilion 1:Rose:whitex1",
-      "pos": [
-        2,
-        4
-      ],
-      "cost": 19,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
         0,
         0,
         0,
@@ -915,8 +705,8 @@ window.FLOWER_ROBOT_DATA = {
         2,
         1,
         1,
-        3,
-        1,
+        0,
+        0,
         0,
         0,
         2,
@@ -926,8 +716,38 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-right",
       "pos": [
+        4,
+        3
+      ],
+      "cost": 19,
+      "cargo": [
+        0,
+        0,
+        0,
         3,
-        4
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "delivered": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "label": "unload Pavilion 2:Tulip:redx3, Pavilion 2:Tulip:yellowx1",
+      "pos": [
+        4,
+        3
       ],
       "cost": 20,
       "cargo": [
@@ -954,7 +774,7 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "move-down",
+      "label": "move-left",
       "pos": [
         3,
         3
@@ -1014,36 +834,6 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "arrive Warehouse",
-      "pos": [
-        3,
-        2
-      ],
-      "cost": 22,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "delivered": [
-        2,
-        1,
-        1,
-        3,
-        1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
       "label": "load Pavilion 3:Orchid:purplex2, Pavilion 3:Orchid:pinkx1",
       "pos": [
         3,
@@ -1074,10 +864,10 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "move-right",
+      "label": "move-up",
       "pos": [
-        4,
-        2
+        3,
+        3
       ],
       "cost": 24,
       "cargo": [
@@ -1106,8 +896,8 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-up",
       "pos": [
-        4,
-        3
+        3,
+        4
       ],
       "cost": 25,
       "cargo": [
@@ -1136,8 +926,8 @@ window.FLOWER_ROBOT_DATA = {
     {
       "label": "move-up",
       "pos": [
-        4,
-        4
+        3,
+        5
       ],
       "cost": 26,
       "cargo": [
@@ -1164,37 +954,7 @@ window.FLOWER_ROBOT_DATA = {
       ]
     },
     {
-      "label": "move-up",
-      "pos": [
-        4,
-        5
-      ],
-      "cost": 27,
-      "cargo": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        2,
-        1,
-        0,
-        0
-      ],
-      "delivered": [
-        2,
-        1,
-        1,
-        3,
-        1,
-        0,
-        0,
-        2,
-        2
-      ]
-    },
-    {
-      "label": "arrive Pavilion 3",
+      "label": "move-right",
       "pos": [
         4,
         5
@@ -1255,46 +1015,46 @@ window.FLOWER_ROBOT_DATA = {
     }
   ],
   "generated": [
-    "g=0 h=2 pos=(2, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=2 h=0 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=3 pos=(3, 2) cargo=(2, 1, 1, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=2 pos=(3, 2) cargo=(0, 0, 0, 3, 1, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=4 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 2, 1, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=2 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 2, 2) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=3 pos=(3, 2) cargo=(0, 0, 1, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=2 pos=(3, 2) cargo=(0, 0, 0, 0, 1, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=4 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 2, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=3 pos=(3, 2) cargo=(0, 1, 0, 0, 0, 0, 1, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=2 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 2, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=3 h=2 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 2) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=5 h=0 pos=(4, 3) cargo=(0, 0, 0, 3, 1, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=5 h=0 pos=(5, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 2, 2) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=5 h=0 pos=(4, 3) cargo=(0, 0, 0, 0, 1, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=5 h=0 pos=(5, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 2, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=5 h=0 pos=(5, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 2) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=6 h=2 pos=(4, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 0, 0, 2, 1, 2, 2)",
-    "g=6 h=2 pos=(5, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 0, 0)",
-    "g=6 h=2 pos=(4, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 0, 2, 1, 2, 2)",
-    "g=6 h=2 pos=(5, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 0, 2)",
-    "g=6 h=2 pos=(5, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 0)",
-    "g=6 h=0 pos=(2, 4) cargo=(2, 1, 1, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
-    "g=6 h=0 pos=(2, 4) cargo=(0, 0, 1, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)"
+    "g=0 h=2 f=2 pos=(2, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=3 f=4 pos=(2, 4) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=1 f=2 pos=(3, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=3 f=4 pos=(1, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=1 f=2 pos=(2, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=3 f=4 pos=(2, 4) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=1 f=2 pos=(3, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=3 f=4 pos=(1, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=1 h=1 f=2 pos=(2, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(3, 4) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(4, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(2, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=0 f=2 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(3, 4) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(4, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=0 f=2 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(2, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=0 f=2 pos=(3, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(1, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(2, 1) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(1, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=2 h=2 f=4 pos=(2, 1) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=3 h=1 f=4 pos=(3, 3) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)",
+    "g=3 h=1 f=4 pos=(4, 2) cargo=(0, 0, 0, 0, 0, 0, 0, 0, 0) remaining=(2, 1, 1, 3, 1, 2, 1, 2, 2)"
   ],
   "trips": [
     {
       "name": "Trip 1",
-      "label": "unload Pavilion 2:Tulip:redx3, Pavilion 2:Tulip:yellowx1",
-      "cost": 6
+      "label": "unload Pavilion 1:Rose:redx2, Pavilion 1:Rose:pinkx1, Pavilion 1:Rose:whitex1",
+      "cost": 7
     },
     {
       "name": "Trip 2",
       "label": "unload Pavilion 4:Goliat Rose:goldx2, Pavilion 4:Goliat Rose:light pinkx2",
-      "cost": 12
+      "cost": 14
     },
     {
       "name": "Trip 3",
-      "label": "unload Pavilion 1:Rose:redx2, Pavilion 1:Rose:pinkx1, Pavilion 1:Rose:whitex1",
-      "cost": 19
+      "label": "unload Pavilion 2:Tulip:redx3, Pavilion 2:Tulip:yellowx1",
+      "cost": 20
     },
     {
       "name": "Trip 4",
