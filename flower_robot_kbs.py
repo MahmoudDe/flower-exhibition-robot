@@ -1,10 +1,8 @@
-import sys
+# Backward-compatible entry point. Prefer: python main.py
+from run_solver import run
 
-from output import main
-from utils import choose
+if __name__ == "__main__":
+    import sys
 
-# recursion instead of loops.
-sys.setrecursionlimit(250000)
-
-# as the main script, run the main
-choose(__name__ == "__main__", main, lambda: None)
+    sys.setrecursionlimit(250000)
+    run()

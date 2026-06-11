@@ -13,4 +13,5 @@ venv/
 .cursor/
 
 # Assignment PDF (keep local only; markdown docs are tracked)
-docs/*.pdf
+docs/*.pdf 
+docs/*.md

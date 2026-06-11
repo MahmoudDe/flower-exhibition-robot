@@ -25,10 +25,6 @@ class LoadBatch(Fact):
     pass
 
 
-class Operation(Fact):
-    pass
-
-
 class Violation(Fact):
     pass
 
