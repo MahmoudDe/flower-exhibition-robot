@@ -5,7 +5,7 @@ from utils import choose, unique
 
 
 # DATA_FILE = "test_data.json"
-DATA_FILE = "test_data.basic.json"
+DATA_FILE = "test_data.json"
 
 # One requested bouquet line: pavilion, flower kind, color, amount, and target cell.
 @dataclass(frozen=True)
@@ -39,7 +39,7 @@ class Result:
     node: Node
     generated: tuple
 
-
+# function takes data from json, and returns it as a dictionary
 def read_data():
     with open(DATA_FILE, encoding="utf-8") as file:
         return json.load(file)
@@ -159,6 +159,7 @@ def build_targets():
     return (("Warehouse", WAREHOUSE),) + tuple(map(target_row, DATA["pavilions"]))
 
 
+# grid dimensions and warehouse position
 WIDTH = grid_value("width")
 HEIGHT = grid_value("height")
 WAREHOUSE = as_pos(DATA["warehouse"])

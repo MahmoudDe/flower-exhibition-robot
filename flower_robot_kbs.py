@@ -3,8 +3,8 @@ import sys
 from output import main
 from utils import choose
 
-# Recursion is used instead of explicit loop syntax.
-sys.setrecursionlimit(200000)
+# recursion instead of loops.
+sys.setrecursionlimit(250000)
 
-# Run the console program only as the main script.
+# as the main script, run the main
 choose(__name__ == "__main__", main, lambda: None)

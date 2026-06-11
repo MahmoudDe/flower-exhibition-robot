@@ -3,118 +3,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flower Robot · KBS Visualizer</title>
+  <title>Flower Robot Visualizer</title>
   <style>
     :root {
-      --bg: #0c0f14;
-      --panel: #141a24;
-      --card: #1c2433;
-      --line: #2a3548;
-      --text: #e8edf5;
-      --dim: #8b97ab;
-      --cyan: #22d3ee;
-      --lime: #a3e635;
-      --rose: #fb7185;
-      --amber: #fbbf24;
-      --violet: #a78bfa;
-      --mono: ui-monospace, Menlo, Consolas, monospace;
-      --hdr: 44px;
-      --side: 310px;
+      --bg: #f5f5f0;
+      --paper: #fff;
+      --border: #ccc;
+      --text: #222;
+      --muted: #666;
+      --accent: #2a6f97;
+      --ok: #2d6a4f;
+      --warn: #bc6c25;
+      --side: 290px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       height: 100%;
       overflow: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: Inter, system-ui, sans-serif;
-      font-size: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      line-height: 1.45;
     }
 
     .app {
       height: 100vh;
       height: 100dvh;
       display: grid;
-      grid-template-rows: var(--hdr) 1fr;
-      overflow: hidden;
+      grid-template-rows: auto 1fr;
     }
 
-    /* header */
-    .hdr {
+    header {
+      padding: 10px 16px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 12px;
-      border-bottom: 1px solid var(--line);
-      background: var(--panel);
-      min-width: 0;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    .title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      white-space: nowrap;
+    header h1 {
+      font-size: 18px;
+      font-weight: normal;
     }
 
-    .hdr-stats {
-      display: flex;
-      gap: 5px;
-      margin-left: auto;
-      flex-shrink: 0;
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
     }
 
-    .pill {
-      font-size: 10px;
-      padding: 4px 8px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--card);
-      color: var(--dim);
-      white-space: nowrap;
-    }
+    .meta strong { color: var(--text); }
 
-    .pill b { color: var(--cyan); font-weight: 700; }
-    .pill b.green { color: var(--lime); }
-
-    .hdr-pos {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--cyan);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 140px;
-    }
-
-    /* body */
-    .body {
+    .main {
       display: grid;
       grid-template-columns: 1fr var(--side);
       min-height: 0;
       overflow: hidden;
     }
 
-    /* grid column */
-    .map-col {
+    .map-area {
+      padding: 12px;
       display: flex;
       flex-direction: column;
       min-height: 0;
-      min-width: 0;
-      padding: 8px 10px;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .map-frame {
+    .map-box {
       flex: 1;
       min-height: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
 
     .map-inner {
@@ -128,45 +92,37 @@
       position: absolute;
       inset: 0;
       display: grid;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-      background: #111820;
+      border: 2px solid #888;
+      background: #fafafa;
     }
 
     .cell {
       position: relative;
-      border: 1px solid rgba(42, 53, 72, 0.7);
-      background: #161d28;
-      transition: background 120ms ease;
+      border: 1px solid #ddd;
+      background: #fff;
     }
 
-    .cell.visited { background: #1a2838; }
-    .cell.current { background: #2a2208; box-shadow: inset 0 0 0 2px var(--amber); }
-    .cell.complete { background: #142318; }
+    .cell.visited { background: #e8f4f8; }
+    .cell.current { background: #fff3cd; outline: 2px solid var(--warn); z-index: 1; }
+    .cell.complete { background: #d8f3dc; }
 
     .coord {
       position: absolute;
-      top: 1px;
-      left: 2px;
-      font-family: var(--mono);
-      font-size: 7px;
-      color: #4a5568;
-      line-height: 1;
+      top: 2px;
+      left: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      color: #999;
     }
 
     .mark {
       position: absolute;
-      right: 1px;
-      bottom: 1px;
-      font-size: 7px;
-      font-weight: 700;
-      color: var(--accent, var(--cyan));
-      background: rgba(0, 0, 0, 0.65);
-      padding: 0 3px;
-      border-radius: 2px;
-      border: 1px solid var(--accent, var(--line));
-      line-height: 1.3;
+      right: 3px;
+      bottom: 3px;
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      font-weight: bold;
+      color: var(--accent);
     }
 
     .route-layer {
@@ -174,748 +130,575 @@
       inset: 0;
       pointer-events: none;
       z-index: 2;
-      border-radius: 8px;
     }
 
-    .route-base { fill: none; stroke: rgba(139, 151, 171, 0.12); stroke-width: 1; }
-    .route-live {
-      fill: none;
-      stroke: var(--cyan);
-      stroke-width: 2;
-      stroke-linecap: round;
-      filter: drop-shadow(0 0 3px rgba(34, 211, 238, 0.4));
-    }
+    .route-base { fill: none; stroke: #bbb; stroke-width: 1; }
+    .route-live { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }
 
     .robot {
       position: absolute;
-      width: 14%;
+      width: 18%;
       aspect-ratio: 1;
-      z-index: 4;
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      background: linear-gradient(180deg, var(--amber), #d97706);
-      border: 2px solid #fff;
-      transition: left 200ms ease, top 200ms ease;
-      box-shadow: 0 0 10px rgba(251, 191, 36, 0.45);
+      z-index: 3;
+      background: var(--warn);
+      border: 2px solid #333;
+      border-radius: 50%;
+      transition: left 0.2s, top 0.2s;
     }
 
     .legend {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 5px;
-      overflow: hidden;
-      justify-content: center;
-      flex-shrink: 0;
-      height: 22px;
-    }
-
-    .leg {
-      font-size: 9px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px solid var(--accent, var(--line));
-      color: var(--accent, var(--dim));
-      background: var(--card);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 120px;
-    }
-
-    /* side panel */
-    .side {
-      border-left: 1px solid var(--line);
-      background: var(--panel);
-      display: grid;
-      grid-template-rows: auto auto 1fr;
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    .side-hdr {
-      padding: 6px 8px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .kbs-badges {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 7px;
-      border-radius: 4px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--dim);
-    }
-
-    .badge.astar { color: var(--cyan); border-color: rgba(34, 211, 238, 0.35); }
-    .badge.goal { color: var(--lime); border-color: rgba(163, 230, 53, 0.4); background: rgba(163, 230, 53, 0.08); display: none; }
-    .badge.goal.on { display: inline-block; }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-
-    .tab {
-      height: 26px;
-      border: 1px solid var(--line);
-      background: var(--bg);
-      color: var(--dim);
-      border-radius: 5px;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      color: var(--cyan);
-      border-color: rgba(34, 211, 238, 0.45);
-      background: rgba(34, 211, 238, 0.08);
-    }
-
-    .side-ctrl {
-      padding: 6px 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .ctrl-row {
-      display: grid;
-      grid-template-columns: 30px 1fr 30px 30px;
-      gap: 4px;
-    }
-
-    .ctrl-row button {
-      height: 28px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--text);
-      border-radius: 5px;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .ctrl-row button:hover { border-color: var(--cyan); }
-    .ctrl-row .play {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--cyan);
-      border-color: rgba(34, 211, 238, 0.4);
-    }
-
-    .scrub { width: 100%; height: 4px; accent-color: var(--cyan); }
-
-    .dots { display: flex; gap: 2px; height: 5px; }
-    .dot {
-      flex: 1; min-width: 0; height: 4px; border: none; border-radius: 999px;
-      background: var(--line); padding: 0; cursor: pointer;
-    }
-    .dot.done { background: rgba(34, 211, 238, 0.45); }
-    .dot.now { background: var(--amber); }
-
-    .side-body {
-      min-height: 0;
-      overflow: hidden;
-      padding: 6px 8px 8px;
-    }
-
-    .panel { display: none; height: 100%; grid-template-rows: repeat(auto-fill, auto); gap: 5px; align-content: start; }
-    .panel.active { display: grid; }
-
-    .block {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: var(--bg);
-      padding: 6px 7px;
-    }
-
-    .block-title {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 4px;
-    }
-
-    .rule-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-    }
-
-    .rule-tag {
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      padding: 2px 6px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-
-    .rule-tag.move { background: rgba(34, 211, 238, 0.15); color: var(--cyan); }
-    .rule-tag.load { background: rgba(163, 230, 53, 0.15); color: var(--lime); }
-    .rule-tag.unload { background: rgba(251, 113, 133, 0.15); color: var(--rose); }
-    .rule-tag.start { background: rgba(139, 151, 171, 0.15); color: var(--dim); }
-
-    .rule-text {
-      font-size: 10px;
-      font-weight: 600;
-      line-height: 1.35;
-      word-break: break-word;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .rule-note { font-size: 8px; color: var(--dim); margin-top: 4px; }
-
-    .astar-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-    }
-
-    .astar-cell {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: var(--muted);
       text-align: center;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      padding: 5px 4px;
     }
 
-    .astar-cell span {
-      display: block;
-      font-size: 7px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--dim);
-    }
-
-    .astar-cell b {
-      font-family: var(--mono);
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .astar-cell.g b { color: var(--cyan); }
-    .astar-cell.h b { color: var(--violet); }
-    .astar-cell.f b { color: var(--lime); }
-
-    .kv-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      font-size: 9px;
-    }
-
-    .kv {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 4px 6px;
-    }
-
-    .kv label { display: block; font-size: 7px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.06em; }
-    .kv output { font-family: var(--mono); font-weight: 700; font-size: 10px; }
-
-    .chip-row {
+    /* sidebar */
+    .sidebar {
+      background: var(--paper);
+      border-left: 1px solid var(--border);
+      padding: 10px 12px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 3px;
-      max-height: 34px;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
       overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
     }
 
-    .chip {
-      font-size: 8px;
-      padding: 2px 5px;
-      border-radius: 3px;
-      background: rgba(251, 191, 36, 0.1);
-      border: 1px solid rgba(251, 191, 36, 0.25);
-      color: var(--amber);
-    }
-
-    .chip.need {
-      background: rgba(167, 139, 250, 0.1);
-      border-color: rgba(167, 139, 250, 0.25);
-      color: #c4b5fd;
-    }
-
-    .empty { font-size: 8px; color: var(--dim); font-style: italic; }
-
-    .pav-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-    }
-
-    .pav {
-      padding: 4px 5px;
-      border-radius: 4px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1px 4px;
-    }
-
-    .pav.done { border-color: rgba(163, 230, 53, 0.35); }
-    .pav.active { border-color: rgba(34, 211, 238, 0.35); }
-    .pav-name { font-size: 8px; font-weight: 600; }
-    .pav-flower { font-size: 7px; color: var(--dim); }
-    .pav-val { font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--accent, var(--lime)); grid-row: 1 / 3; align-self: center; }
-    .pav-bar { grid-column: 1 / -1; height: 2px; background: var(--line); border-radius: 999px; overflow: hidden; }
-    .pav-bar i { display: block; height: 100%; width: var(--pct); background: var(--accent, var(--cyan)); }
-
-    .path-list { display: flex; flex-direction: column; gap: 3px; }
-    .path-item {
-      display: grid;
-      grid-template-columns: 22px 52px 1fr;
-      gap: 4px;
-      align-items: start;
-      padding: 4px 5px;
-      border-radius: 4px;
-      border: 1px solid transparent;
-      font-size: 9px;
-    }
-
-    .path-item .num { font-family: var(--mono); color: var(--dim); font-size: 8px; }
-    .path-item .tag { font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-    .path-item .txt { line-height: 1.3; word-break: break-word; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .path-item.muted { opacity: 0.45; }
-    .path-item.now { border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.06); }
-
-    .tree-nav {
-      display: grid;
-      grid-template-columns: 28px 1fr 28px;
-      gap: 4px;
+    .controls {
+      display: flex;
+      gap: 6px;
       align-items: center;
     }
 
-    .tree-nav button {
-      height: 28px;
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--text);
-      border-radius: 5px;
+    .controls button {
+      padding: 6px 12px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      background: #f9f9f9;
+      border-radius: 4px;
       cursor: pointer;
+    }
+
+    .controls button:hover { background: #eee; }
+    .controls .play { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .controls .play:hover { background: #1d5570; }
+
+    .slider {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .step-num {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .action-box {
+      background: #f9f9f9;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px;
+    }
+
+    .action-type {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .action-text {
+      font-size: 13px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .goal-msg {
+      display: none;
+      color: var(--ok);
+      font-weight: bold;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .goal-msg.show { display: block; }
+
+    .costs {
+      font-size: 13px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .costs span { color: var(--muted); }
+
+    .facts {
+      font-size: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .facts div {
+      background: #f9f9f9;
+      padding: 6px 8px;
+      border: 1px solid #eee;
+      border-radius: 3px;
+    }
+
+    .facts label {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .list-plain {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .list-plain .dim { color: var(--muted); }
+
+    .pav-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .pav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 8px;
+      border: 1px solid #eee;
+      border-radius: 3px;
       font-size: 12px;
     }
 
-    .tree-line {
-      font-family: var(--mono);
-      font-size: 8px;
+    .pav.done { background: #edf7ed; border-color: #b7ddb9; }
+    .pav.partial { background: #f0f7ff; }
+
+    .path-steps {
+      font-size: 10px;
       line-height: 1.45;
-      color: var(--dim);
-      padding: 5px 6px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      min-height: 52px;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
+      font-family: "Courier New", monospace;
+      max-height: 72px;
+      overflow: hidden;
+    }
+
+    .path-steps .cur {
+      background: #fff3cd;
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+
+    .tree-box {
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      padding: 6px;
+      border-radius: 3px;
+      line-height: 1.4;
+      height: 40px;
       overflow: hidden;
       word-break: break-word;
     }
 
-    .tree-meta {
+    .tree-ctrl {
       display: flex;
-      justify-content: space-between;
-      font-size: 8px;
-      color: var(--dim);
-      margin-top: 2px;
+      gap: 6px;
+      align-items: center;
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
     }
 
-    .constraint-list {
-      font-size: 8px;
-      color: var(--dim);
-      line-height: 1.5;
-      list-style: none;
+    .tree-ctrl button {
+      padding: 2px 8px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 3px;
+      cursor: pointer;
     }
 
-    .constraint-list li::before { content: "✓ "; color: var(--lime); }
+    .grow { flex: 1; min-height: 0; overflow: hidden; }
+    .grow .pav-list { max-height: 100%; overflow: hidden; }
 
-    @media (max-width: 720px) {
-      :root { --side: 260px; --hdr: 40px; }
-      .hdr-stats .pill:not(:last-child) { display: none; }
-      .legend .leg { max-width: 72px; }
+    .algo-picker {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
+
+    .algo-picker button {
+      flex: 1;
+      min-width: 72px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      border: 1px solid var(--border);
+      background: #f9f9f9;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .algo-picker button:hover { background: #eee; }
+
+    .algo-picker button.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .algo-desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+      line-height: 1.35;
+    }
+
+    .algo-cost {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .algo-cost strong { color: var(--text); }
   </style>
 </head>
 <body>
   <div class="app">
-    <header class="hdr">
-      <span class="title">Flower Robot</span>
-      <span class="hdr-pos" id="position">POS (2,3)</span>
-      <div class="hdr-stats">
-        <span class="pill" id="gridInfo">5×5</span>
-        <span class="pill" id="costInfo">cost <b>28</b></span>
-        <span class="pill" id="stepLabel">step <b class="green">0</b></span>
-      </div>
+    <header>
+      <h1>Flower Robot</h1>
+      <p class="meta" id="headerMeta">Grid 5×5 · Warehouse (3,2) · Best cost <strong>28</strong></p>
     </header>
 
-    <div class="body">
-      <section class="map-col">
-        <div class="map-frame">
-          <div class="map-inner" id="mapInner">
-            <svg class="route-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <div class="main">
+      <div class="map-area">
+        <div class="map-box">
+          <div class="map-inner">
+            <svg class="route-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
               <polyline class="route-base" id="routeBase"></polyline>
               <polyline class="route-live" id="routeLive"></polyline>
             </svg>
             <div class="board" id="board"></div>
-            <div class="robot" id="robot" aria-label="robot"></div>
+            <div class="robot" id="robot"></div>
           </div>
         </div>
-        <div class="legend" id="legend"></div>
-      </section>
+        <p class="legend" id="legend"></p>
+      </div>
 
-      <aside class="side">
-        <div class="side-hdr">
-          <div class="kbs-badges">
-            <span class="badge astar" id="strategyBadge">A* · Experta</span>
-            <span class="badge" id="maxLoadBadge">max 4</span>
-            <span class="badge goal" id="goalBadge">Goal reached</span>
-          </div>
-          <div class="tabs" role="tablist">
-            <button type="button" class="tab active" data-tab="state" role="tab">State</button>
-            <button type="button" class="tab" data-tab="path" role="tab">Path</button>
-            <button type="button" class="tab" data-tab="tree" role="tab">Tree</button>
-          </div>
+      <aside class="sidebar">
+        <div class="controls">
+          <button type="button" id="prevBtn">Back</button>
+          <button type="button" class="play" id="playBtn">Play</button>
+          <button type="button" id="nextBtn">Next</button>
+          <button type="button" id="resetBtn">Reset</button>
         </div>
+        <input class="slider" id="stepRange" type="range" min="0" value="0">
+        <p class="step-num" id="stepLabel">Step 0 of 0</p>
 
-        <div class="side-ctrl">
-          <div class="ctrl-row">
-            <button id="prevBtn" aria-label="Previous">◀</button>
-            <button class="play" id="playBtn" aria-label="Play">▶ PLAY</button>
-            <button id="nextBtn" aria-label="Next">▶</button>
-            <button id="resetBtn" aria-label="Reset" title="Reset">↺</button>
+        <section>
+          <h2>Algorithm</h2>
+          <div class="algo-picker" id="algoPicker"></div>
+          <p class="algo-desc" id="algoDesc"></p>
+          <p class="algo-cost" id="algoCost"></p>
+        </section>
+
+        <section>
+          <h2>Now</h2>
+          <div class="action-box">
+            <p class="action-type" id="actionType">Starting</p>
+            <p class="action-text" id="action">Initial state</p>
+            <p class="goal-msg" id="goalMsg">All deliveries done — goal reached.</p>
           </div>
-          <input class="scrub" id="stepRange" type="range" min="0" value="0" aria-label="Step">
-          <div class="dots" id="dots" aria-hidden="true"></div>
-        </div>
+        </section>
 
-        <div class="side-body">
-          <div class="panel active" id="panel-state" role="tabpanel">
-            <div class="block">
-              <div class="block-title">Rule fired (Req. 2)</div>
-              <div class="rule-row">
-                <span class="rule-tag start" id="ruleTag">START</span>
-                <div>
-                  <div class="rule-text" id="action">Initial state</div>
-                  <div class="rule-note" id="ruleNote">Experta generation rule · cost +1 per operation</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="block-title">A* evaluation (Req. 6) · f = g + h</div>
-              <div class="astar-row">
-                <div class="astar-cell g"><span>g(n)</span><b id="cost">0</b></div>
-                <div class="astar-cell h"><span>h(n)</span><b id="heuristic">0</b></div>
-                <div class="astar-cell f"><span>f(n)</span><b id="fscore">0</b></div>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="block-title">State facts (Req. 1)</div>
-              <div class="kv-grid">
-                <div class="kv"><label>Position</label><output id="statePos">(2,3)</output></div>
-                <div class="kv"><label>Cargo</label><output id="load">0/4</output></div>
-                <div class="kv"><label>Delivered</label><output id="delivered">0/14</output></div>
-                <div class="kv"><label>Remaining</label><output id="openDemand">14</output></div>
-              </div>
-            </div>
-
-            <div class="block">
-              <div class="block-title">Robot cargo</div>
-              <div class="chip-row" id="cargo"></div>
-            </div>
-
-            <div class="block">
-              <div class="block-title">Remaining needs</div>
-              <div class="chip-row" id="remaining"></div>
-            </div>
-
-            <div class="block">
-              <div class="block-title">Pavilion delivery</div>
-              <div class="pav-grid" id="mission"></div>
-            </div>
+        <section>
+          <h2 id="costsTitle">Search costs</h2>
+          <div class="costs">
+            <div>g(n) = <strong id="cost">0</strong> <span>(steps so far)</span></div>
+            <div id="heuristicRow">h(n) = <strong id="heuristic">0</strong> <span>(estimate left)</span></div>
+            <div id="fscoreRow">f(n) = <strong id="fscore">0</strong> <span>(g + h)</span></div>
           </div>
+        </section>
 
-          <div class="panel" id="panel-path" role="tabpanel">
-            <div class="block">
-              <div class="block-title">Solution path (Req. 4) · optimal <b id="pathCost">28</b></div>
-              <div class="path-list" id="pathList"></div>
-            </div>
-            <div class="block">
-              <div class="block-title">Delivery trips</div>
-              <div class="chip-row" id="trips"></div>
-            </div>
+        <section>
+          <h2>Robot</h2>
+          <div class="facts">
+            <div><label>Position</label><span id="statePos">(2, 3)</span></div>
+            <div><label>Cargo</label><span id="load">0 / 4</span></div>
+            <div><label>Delivered</label><span id="delivered">0</span></div>
+            <div><label>Still needed</label><span id="openDemand">0</span></div>
           </div>
+          <p class="list-plain" style="margin-top:6px" id="cargo">Nothing on the robot.</p>
+        </section>
 
-          <div class="panel" id="panel-tree" role="tabpanel">
-            <div class="block">
-              <div class="block-title">Search tree (Req. 5) · <span id="treeTotal">0</span> states</div>
-              <div class="tree-nav">
-                <button type="button" id="treePrev" aria-label="Previous tree node">◀</button>
-                <div class="tree-line" id="treeLine">—</div>
-                <button type="button" id="treeNext" aria-label="Next tree node">▶</button>
-              </div>
-              <div class="tree-meta">
-                <span id="treeIndex">1 / 24</span>
-                <span>sample of generated states</span>
-              </div>
-            </div>
-            <div class="block">
-              <div class="block-title">Constraints enforced (Req. 3)</div>
-              <ul class="constraint-list">
-                <li>Grid bounds on moves</li>
-                <li>Max load ≤ pavilion max</li>
-                <li>Load: same flower OR same color</li>
-                <li>Unload only at matching pavilion</li>
-              </ul>
-            </div>
+        <section class="grow">
+          <h2>Pavilions</h2>
+          <div class="pav-list" id="mission"></div>
+        </section>
+
+        <section>
+          <h2>Solution path</h2>
+          <div class="path-steps" id="pathList"></div>
+        </section>
+
+        <section>
+          <h2>Search tree</h2>
+          <div class="tree-box" id="treeLine">—</div>
+          <div class="tree-ctrl">
+            <button type="button" id="treePrev">‹</button>
+            <button type="button" id="treeNext">›</button>
+            <span id="treeIndex">1 / 24</span>
+            <span id="treeTotal"></span>
           </div>
-        </div>
+        </section>
       </aside>
     </div>
   </div>
 
   <script src="solution_data.js"></script>
   <script>
-    const data = window.FLOWER_ROBOT_DATA;
-    const items = data.items;
-    const states = data.states;
-    const generated = data.generated || [];
-    const trips = data.trips || [];
-    const solutionPath = data.solutionPath || states.map(s => s.label).slice(1);
-    const targets = data.targets;
-    const grid = data.grid;
-    const totalNeed = total(items.map(i => i[3]));
-    let treeIdx = 0;
-    const cellW = 100 / grid.width;
-    const cellH = 100 / grid.height;
-    const palette = ["#22d3ee", "#fb7185", "#fbbf24", "#a78bfa", "#a3e635", "#38bdf8", "#f472b6", "#4ade80"];
+    const raw = window.FLOWER_ROBOT_DATA;
+    const items = raw.items;
+    const targets = raw.targets;
+    const grid = raw.grid;
+
+    const normalizeAlgorithms = data => {
+      if (data.algorithms && data.algorithms.length) return data.algorithms;
+      return [{
+        id: "astar",
+        name: "A*",
+        description: data.searchStrategy || "A* search",
+        cost: data.optimalCost,
+        generatedTotal: data.generatedTotal || 0,
+        states: data.states || [],
+        generated: data.generated || [],
+      }];
+    };
+
+    const algorithms = normalizeAlgorithms(raw);
+    let algoIdx = Math.max(0, algorithms.findIndex(a => a.id === (raw.defaultAlgorithm || "astar")));
+    let algo = algorithms[algoIdx];
+    let states = algo.states;
+    let generated = algo.generated || [];
 
     const $ = id => document.getElementById(id);
-    const cells = () => [...document.querySelectorAll(".cell")];
-    const posKey = p => `${p[0]},${p[1]}`;
-    const routePt = s => `${(s.pos[0] - 0.5) * cellW},${(grid.height - s.pos[1] + 0.5) * cellH}`;
-    const routePts = n => states.slice(0, n + 1).map(routePt).join(" ");
-    function total(a) { return a.reduce((s, v) => s + v, 0); }
-    const pct = (d, n) => n ? `${Math.round(d / n * 100)}%` : "0%";
-    const kind = l => l.startsWith("load") ? "load" : l.startsWith("unload") ? "unload" : l.startsWith("move") ? "move" : "start";
-    const ruleName = l => ({
-      load: "load_same_flower / load_same_color",
-      unload: "unload_at_pavilion",
-      move: "move-right/left/up/down",
-      start: "initial_facts",
+    const posKey = p => p[0] + "," + p[1];
+    const cellW = 100 / grid.width;
+    const cellH = 100 / grid.height;
+
+    const kind = l =>
+      l.startsWith("load") ? "load" :
+      l.startsWith("unload") ? "unload" :
+      l.startsWith("move") ? "move" : "start";
+
+    const actionLabel = l => ({
+      start: "Starting",
+      move: "Moving",
+      load: "Loading at warehouse",
+      unload: "Unloading at pavilion",
     }[kind(l)]);
-    const ruleNote = l => ({
-      load: "Warehouse only · empty cargo · same flower OR same color",
-      unload: "Matching pavilion · partial or full unload",
-      move: "One grid step · bounds checked",
-      start: "Grid, warehouse, robot, pavilions, needs",
-    }[kind(l)]);
-    const tagLabel = l => ({ load: "LOAD", unload: "UNLOAD", move: "MOVE", start: "START" }[kind(l)]);
 
     const targetAt = p => targets.find(t => posKey(t.pos) === posKey(p));
-    const tIdx = t => targets.findIndex(e => e.name === t.name);
-    const tColor = t => palette[(tIdx(t) + palette.length) % palette.length];
-    const tStyle = t => `style="--accent:${tColor(t)}"`;
+    const flowerOf = t => (items.find(i => i[0] === t.name) || ["", "?"])[1];
 
     const cellItems = k => items.map((item, i) => ({ item, i })).filter(e => posKey(e.item[4]) === k);
-    const needAt = k => total(cellItems(k).map(e => e.item[3]));
-    const delAt = (s, k) => total(cellItems(k).map(e => s.delivered[e.i]));
+    const needAt = k => cellItems(k).reduce((s, e) => s + e.item[3], 0);
+    const delAt = (state, k) => cellItems(k).reduce((sum, e) => sum + state.delivered[e.i], 0);
     const doneAt = (s, k) => needAt(k) > 0 && delAt(s, k) === needAt(k);
-    const flowerOf = t => (items.find(i => i[0] === t.name) || ["", "—"])[1];
     const missions = () => targets.filter(t => t.name !== "Warehouse");
 
-    const botLeft = p => `calc(${(p[0] - 1) * cellW}% + ${cellW * 0.28}%)`;
-    const botTop = p => `calc(${(grid.height - p[1]) * cellH}% + ${cellH * 0.28}%)`;
+    const botLeft = p => `calc(${(p[0] - 1) * cellW}% + ${cellW * 0.2}%)`;
+    const botTop = p => `calc(${(grid.height - p[1]) * cellH}% + ${cellH * 0.2}%)`;
+    const routePt = s => (s.pos[0] - 0.5) * cellW + "," + (grid.height - s.pos[1] + 0.5) * cellH;
+    const routePts = n => states.slice(0, n + 1).map(routePt).join(" ");
 
     const mark = p => {
       const t = targetAt(p);
       if (!t) return "";
-      const s = t.name === "Warehouse" ? "W" : "P" + t.name.replace(/\D/g, "");
-      return `<span class="mark" ${tStyle(t)}>${s}</span>`;
+      const name = t.name === "Warehouse" ? "Warehouse" : t.name.replace("Pavilion ", "P");
+      return '<span class="mark">' + name + "</span>";
     };
 
     const cellHtml = (_, i) => {
       const x = (i % grid.width) + 1;
       const y = grid.height - Math.floor(i / grid.width);
-      return `<div class="cell" data-x="${x}" data-y="${y}"><span class="coord">${x},${y}</span>${mark([x, y])}</div>`;
+      return '<div class="cell" data-x="' + x + '" data-y="' + y + '"><span class="coord">' + x + "," + y + "</span>" + mark([x, y]) + "</div>";
     };
 
-    let step = 0, timer = 0;
+    let step = 0;
+    let timer = 0;
+    let treeIdx = 0;
 
-    const pathWindow = () => {
-      const start = Math.max(0, Math.min(step - 2, states.length - 5));
-      const end = Math.min(states.length, start + 5);
-      return states.slice(start, end).map((s, i) => ({ s, idx: start + i }));
-    };
+    const stop = () => { clearInterval(timer); timer = 0; $("playBtn").textContent = "Play"; };
 
-    const pathItemHtml = ({ s, idx }) => {
-      const k = kind(s.label);
-      const cls = idx === step ? "now" : idx < step ? "muted" : "";
-      const txt = s.label === "Initial state" ? "Initial state" : s.label;
-      return `<div class="path-item ${cls}"><span class="num">${idx}</span><span class="tag rule-tag ${k}">${tagLabel(s.label)}</span><span class="txt">${txt}</span></div>`;
+    const updateHeader = () => {
+      const optimal = raw.optimalCost != null ? raw.optimalCost : algorithms[0].cost;
+      $("headerMeta").innerHTML =
+        "Grid " + grid.width + "×" + grid.height +
+        " · Warehouse (" + raw.warehouse[0] + "," + raw.warehouse[1] + ")" +
+        " · " + algo.name + " cost <strong>" + algo.cost + "</strong>" +
+        (algo.cost === optimal ? " · optimal <strong>" + optimal + "</strong>" : "");
     };
 
     const paintTree = () => {
       if (!generated.length) {
-        $("treeLine").textContent = "Run python flower_robot_kbs.py to refresh search tree data.";
-        $("treeIndex").textContent = "0 / 0";
+        $("treeLine").textContent = "Run the solver first (python flower_robot_kbs.py).";
+        $("treeIndex").textContent = "";
         return;
       }
       treeIdx = Math.max(0, Math.min(generated.length - 1, treeIdx));
       $("treeLine").textContent = generated[treeIdx];
-      $("treeIndex").textContent = `${treeIdx + 1} / ${generated.length}`;
+      $("treeIndex").textContent = (treeIdx + 1) + " / " + generated.length;
+    };
+
+    const pathSnippet = () => {
+      const start = Math.max(0, step - 2);
+      const end = Math.min(states.length, start + 5);
+      return states.slice(start, end).map((s, i) => {
+        const idx = start + i;
+        const text = s.label;
+        const prefix = idx + ". ";
+        return idx === step
+          ? '<div class="cur">' + prefix + text + "</div>"
+          : "<div>" + prefix + text + "</div>";
+      }).join("");
     };
 
     const paint = v => {
       step = Math.max(0, Math.min(states.length - 1, +v));
       const s = states[step];
-      const vis = [...new Set(states.slice(0, step + 1).map(x => posKey(x.pos)))];
-
+      const rem = s.remaining || items.map((item, i) => Math.max(0, item[3] - s.delivered[i]));
+      const cargoSum = s.cargo.reduce((a, b) => a + b, 0);
+      const delSum = s.delivered.reduce((a, b) => a + b, 0);
+      const remSum = rem.reduce((a, b) => a + b, 0);
       const g = s.cost;
       const h = s.h != null ? s.h : 0;
       const f = s.f != null ? s.f : g + h;
-      const rem = s.remaining || items.map((item, i) => Math.max(0, item[3] - s.delivered[i]));
-      const isGoal = s.isGoal || (total(rem) === 0 && total(s.cargo) === 0);
+      const isGoal = s.isGoal || (remSum === 0 && cargoSum === 0);
 
       $("robot").style.left = botLeft(s.pos);
       $("robot").style.top = botTop(s.pos);
       $("routeBase").setAttribute("points", routePts(states.length - 1));
       $("routeLive").setAttribute("points", routePts(step));
-      $("position").textContent = `POS (${s.pos[0]},${s.pos[1]}) · g=${g}`;
-      $("stepLabel").innerHTML = `step <b class="green">${step}/${states.length - 1}</b>`;
-      $("stepRange").value = step;
 
+      $("stepLabel").textContent = "Step " + step + " of " + (states.length - 1);
+      $("stepRange").value = step;
+      $("actionType").textContent = actionLabel(s.label);
       $("action").textContent = s.label;
-      $("ruleTag").textContent = tagLabel(s.label);
-      $("ruleTag").className = `rule-tag ${kind(s.label)}`;
-      $("ruleNote").textContent = `${ruleName(s.label)} · ${ruleNote(s.label)}`;
+      $("goalMsg").classList.toggle("show", isGoal);
 
       $("cost").textContent = g;
       $("heuristic").textContent = h;
       $("fscore").textContent = f;
-      $("statePos").textContent = `(${s.pos[0]},${s.pos[1]})`;
-      $("load").textContent = `${total(s.cargo)}/${data.maxLoad}`;
-      $("delivered").textContent = `${total(s.delivered)}/${totalNeed}`;
-      $("openDemand").textContent = total(rem);
-      $("goalBadge").classList.toggle("on", isGoal);
+      $("statePos").textContent = "(" + s.pos[0] + ", " + s.pos[1] + ")";
+      $("load").textContent = cargoSum + " / " + raw.maxLoad;
+      $("delivered").textContent = delSum + " bouquets";
+      $("openDemand").textContent = remSum + " bouquets";
 
       const cargo = items.map((item, i) => ({ v: s.cargo[i], item })).filter(x => x.v > 0);
       $("cargo").innerHTML = cargo.length
-        ? cargo.map(x => `<span class="chip">${x.item[1]} ${x.item[2]}×${x.v}</span>`).join("")
-        : `<span class="empty">empty (ready to load)</span>`;
-
-      const needLeft = items.map((item, i) => ({ v: rem[i], item })).filter(x => x.v > 0);
-      $("remaining").innerHTML = needLeft.length
-        ? needLeft.map(x => `<span class="chip need">${x.item[1]} ${x.item[2]}×${x.v}</span>`).join("")
-        : `<span class="empty">none — goal satisfied</span>`;
+        ? "Carrying: " + cargo.map(x => x.item[1] + " " + x.item[2] + " ×" + x.v).join(", ")
+        : "Nothing on the robot.";
 
       $("mission").innerHTML = missions().map(t => {
         const k = posKey(t.pos);
-        const d = delAt(s, k), n = needAt(k);
-        const cls = d === n ? " done" : d > 0 ? " active" : "";
-        const short = t.name.replace("Pavilion ", "P");
-        return `<div class="pav${cls}" ${tStyle(t)}><span class="pav-name">${short}</span><span class="pav-val">${d}/${n}</span><span class="pav-flower">${flowerOf(t)}</span><div class="pav-bar"><i style="--pct:${pct(d, n)}"></i></div></div>`;
+        const d = delAt(s, k);
+        const n = needAt(k);
+        const cls = d === n ? " done" : d > 0 ? " partial" : "";
+        const mark = d === n ? " ✓" : "";
+        return '<div class="pav' + cls + '"><span>' + t.name + " (" + flowerOf(t) + ")" + mark + '</span><span>' + d + "/" + n + "</span></div>";
       }).join("");
 
-      $("pathList").innerHTML = pathWindow().map(pathItemHtml).join("");
-      $("pathCost").textContent = data.optimalCost;
-
-      $("trips").innerHTML = trips.length
-        ? trips.map(t => `<span class="chip" title="${t.label}">${t.name} · g=${t.cost}</span>`).join("")
-        : `<span class="empty">no trips yet</span>`;
+      $("pathList").innerHTML = pathSnippet();
 
       if (generated.length) {
-        treeIdx = Math.min(Math.floor(step / Math.max(1, states.length - 1) * (generated.length - 1)), generated.length - 1);
+        treeIdx = Math.min(
+          Math.floor(step / Math.max(1, states.length - 1) * (generated.length - 1)),
+          generated.length - 1
+        );
         paintTree();
       }
 
-      cells().forEach(el => {
-        const k = `${el.dataset.x},${el.dataset.y}`;
+      const vis = [...new Set(states.slice(0, step + 1).map(x => posKey(x.pos)))];
+      document.querySelectorAll(".cell").forEach(el => {
+        const k = el.dataset.x + "," + el.dataset.y;
         el.classList.toggle("visited", vis.includes(k));
         el.classList.toggle("current", k === posKey(s.pos));
         el.classList.toggle("complete", doneAt(s, k));
       });
-
-      [...document.querySelectorAll(".dot")].forEach((el, i) => {
-        el.classList.toggle("done", i < step);
-        el.classList.toggle("now", i === step);
-      });
     };
 
-    const stop = () => { clearInterval(timer); timer = 0; $("playBtn").textContent = "▶ PLAY"; };
     const play = () => {
       if (timer) return stop();
-      timer = setInterval(() => step < states.length - 1 ? paint(step + 1) : stop(), 700);
-      $("playBtn").textContent = "⏸";
+      timer = setInterval(() => { if (step < states.length - 1) paint(step + 1); else stop(); }, 800);
+      $("playBtn").textContent = "Pause";
     };
 
-    $("board").style.gridTemplateColumns = `repeat(${grid.width}, 1fr)`;
+    const setAlgorithm = idx => {
+      stop();
+      algoIdx = idx;
+      algo = algorithms[algoIdx];
+      states = algo.states;
+      generated = algo.generated || [];
+      treeIdx = 0;
+      $("stepRange").max = Math.max(0, states.length - 1);
+      $("treeTotal").textContent = algo.generatedTotal
+        ? "(" + algo.generatedTotal.toLocaleString() + " states explored)"
+        : "";
+      document.querySelectorAll(".algo-picker button").forEach((btn, i) => {
+        btn.classList.toggle("active", i === algoIdx);
+      });
+      $("algoDesc").textContent = algo.description || "";
+      const optimal = raw.optimalCost != null ? raw.optimalCost : algorithms[0].cost;
+      const tag = algo.cost === optimal ? " (optimal)" : algo.cost > optimal ? " (suboptimal)" : "";
+      $("algoCost").innerHTML = "Solution cost: <strong>" + algo.cost + "</strong>" + tag;
+      $("costsTitle").textContent = algo.id === "astar" ? "A* costs" : "Search costs";
+      $("heuristicRow").style.display = "";
+      $("fscoreRow").style.display = algo.id === "astar" ? "" : "none";
+      updateHeader();
+      paint(0);
+    };
+
+    const buildAlgoPicker = () => {
+      $("algoPicker").innerHTML = algorithms.map((a, i) =>
+        '<button type="button" data-idx="' + i + '">' + a.name + "</button>"
+      ).join("");
+      $("algoPicker").addEventListener("click", e => {
+        const btn = e.target.closest("button[data-idx]");
+        if (!btn) return;
+        setAlgorithm(+btn.dataset.idx);
+      });
+      setAlgorithm(algoIdx);
+    };
+
+    $("board").style.gridTemplateColumns = "repeat(" + grid.width + ", 1fr)";
     $("board").innerHTML = Array.from({ length: grid.width * grid.height }, cellHtml).join("");
 
-    $("gridInfo").textContent = `${grid.width}×${grid.height}`;
-    $("costInfo").innerHTML = `cost <b>${data.optimalCost}</b>`;
-    $("stepRange").max = states.length - 1;
-    $("strategyBadge").textContent = (data.searchStrategy || "A* · Experta").replace(" (Experta rules, f = g + h)", "").slice(0, 18);
-    $("maxLoadBadge").textContent = `max ${data.maxLoad}`;
-    $("pathCost").textContent = data.optimalCost;
-    $("treeTotal").textContent = data.generatedTotal || generated.length;
+    $("legend").textContent = targets.map(t => t.name + " (" + flowerOf(t) + ")").join(" · ");
 
-    $("legend").innerHTML = targets.map(t => {
-      const label = t.name === "Warehouse" ? "WH" : t.name.replace("Pavilion ", "P");
-      return `<span class="leg" ${tStyle(t)} title="${t.name}">${label} · ${flowerOf(t)}</span>`;
-    }).join("");
-
-    $("dots").innerHTML = states.map((_, i) => `<button type="button" class="dot" data-step="${i}" aria-label="Step ${i}"></button>`).join("");
-
-    $("dots").addEventListener("click", e => {
-      const d = e.target.closest(".dot");
-      if (d) { stop(); paint(d.dataset.step); }
-    });
-
-    document.querySelectorAll(".tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-        tab.classList.add("active");
-        $("panel-" + tab.dataset.tab).classList.add("active");
-      });
-    });
-
-    $("treePrev").addEventListener("click", () => { treeIdx = Math.max(0, treeIdx - 1); paintTree(); });
-    $("treeNext").addEventListener("click", () => { treeIdx = Math.min(generated.length - 1, treeIdx + 1); paintTree(); });
+    buildAlgoPicker();
 
     $("stepRange").addEventListener("input", e => { stop(); paint(e.target.value); });
     $("prevBtn").addEventListener("click", () => { stop(); paint(step - 1); });
     $("nextBtn").addEventListener("click", () => { stop(); paint(step + 1); });
     $("resetBtn").addEventListener("click", () => { stop(); paint(0); });
     $("playBtn").addEventListener("click", play);
-    paint(0);
+    $("treePrev").addEventListener("click", () => { treeIdx--; paintTree(); });
+    $("treeNext").addEventListener("click", () => { treeIdx++; paintTree(); });
   </script>
 </body>
 </html>

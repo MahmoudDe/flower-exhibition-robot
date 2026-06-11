@@ -43,25 +43,37 @@ def fact_f_value(fact):
     return fact_field(fact, "f")
 
 
-def push_frontier(frontier, fact, serial):
-    return frontier + ((fact_f_value(fact), serial, fact),), serial + 1
+def frontier_entry(fact, serial):
+    return (fact_f_value(fact), serial, fact)
 
 
-def pick_astar(frontier):
-    return min(frontier, key=lambda entry: (entry[0], entry[1]))
+def insert_sorted(frontier, entry):
+    index = 0
+    size = len(frontier)
+    while index < size and frontier[index] < entry:
+        index += 1
+    return frontier[:index] + (entry,) + frontier[index:]
 
 
-def pick_dfs(frontier):
-    return frontier[-1]
+def push_frontier(frontier, fact, serial, mode):
+    entry = frontier_entry(fact, serial)
+    new_frontier = choose(
+        mode == "dfs",
+        lambda: frontier + (entry,),
+        lambda: insert_sorted(frontier, entry),
+    )
+    return new_frontier, serial + 1
 
 
-def pop_frontier_simple(frontier, pick):
-    entry = pick(frontier)
-    index = frontier.index(entry)
-    return frontier[:index] + frontier[index + 1 :], entry[2]
+def pop_frontier(frontier, mode):
+    return choose(
+        mode == "dfs",
+        lambda: (frontier[:-1], frontier[-1][2]),
+        lambda: (frontier[1:], frontier[0][2]),
+    )
 
 
-def add_successors(frontier, best, generated, serial, facts):
+def add_successors(frontier, best, generated, serial, facts, mode):
     match facts:
         case ():
             return frontier, best, generated, serial
@@ -74,13 +86,14 @@ def add_successors(frontier, best, generated, serial, facts):
             return choose(
                 g < best.get(key, INF),
                 lambda: add_successors(
-                    push_frontier(frontier, fact, serial)[0],
+                    push_frontier(frontier, fact, serial, mode)[0],
                     best | {key: g},
                     generated + (line,),
                     serial + 1,
                     tuple(rest),
+                    mode,
                 ),
-                lambda: add_successors(frontier, best, generated, serial, tuple(rest)),
+                lambda: add_successors(frontier, best, generated, serial, tuple(rest), mode),
             )
 
 
@@ -114,13 +127,12 @@ def start_search(mode="astar"):
     y = start_fact["y"]
     start_remaining = INITIAL_REMAINING
     start_cargo = EMPTY_LOAD
-    pick = choose(mode == "dfs", lambda: pick_dfs, lambda: pick_astar)
-    frontier, serial = push_frontier((), start_fact, 0)
+    frontier, serial = push_frontier((), start_fact, 0, mode)
     best = {state_key(x, y, start_remaining, start_cargo): 0}
     generated = (generated_line(x, y, start_remaining, start_cargo, 0),)
 
     while frontier:
-        frontier, fact = pop_frontier_simple(frontier, pick)
+        frontier, fact = pop_frontier(frontier, mode)
         key = state_key(
             fact_field(fact, "x"),
             fact_field(fact, "y"),
@@ -143,7 +155,7 @@ def start_search(mode="astar"):
             path,
         )
         generated = generated + tree_lines
-        frontier, best, generated, serial = add_successors(frontier, best, generated, serial, successors)
+        frontier, best, generated, serial = add_successors(frontier, best, generated, serial, successors, mode)
 
     return None
 

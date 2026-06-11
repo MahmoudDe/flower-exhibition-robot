@@ -9,7 +9,7 @@ collections.Mapping = collections.abc.Mapping
 # Requirement 3: capacity and mixed-load Violation rules (salience=100).
 # Requirement 4: goal_reached + print_solution rules.
 # Requirement 5: TreeLine facts emitted for every generated state (DFS via search driver).
-# Requirement 6: GeneratedState carries g, h, f; search.py orders frontier by f(n) for A*.
+# Requirement 6: GeneratedState carries g, h, f; search.py expands lowest f(n) first for A*.
 
 from experta import DefFacts, KnowledgeEngine, MATCH, Rule, TEST
 

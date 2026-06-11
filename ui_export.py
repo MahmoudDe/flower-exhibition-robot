@@ -117,27 +117,41 @@ def trip_rows(states):
     return tuple(map(lambda pair: {"name": "Trip " + str(pair[0] + 1), "label": pair[1]["label"], "cost": pair[1]["cost"]}, enumerate(stops)))
 
 
-def export_payload(result):
+def solution_entry(result, algo_id, name, description):
     states = replay_rows(result.node.path)
     return {
-        "grid": {"width": WIDTH, "height": HEIGHT},
-        "warehouse": list(WAREHOUSE),
-        "start": list(START),
-        "maxLoad": MAX_LOAD,
-        "optimalCost": result.node.g,
-        "searchStrategy": "A* (Experta rules, f = g + h)",
+        "id": algo_id,
+        "name": name,
+        "description": description,
+        "cost": result.node.g,
         "generatedTotal": len(result.generated),
         "solutionPath": list(result.node.path),
-        "items": item_rows(ITEMS),
-        "targets": target_rows(TARGETS),
         "states": states,
         "generated": generated_rows(result.generated),
         "trips": trip_rows(states),
     }
 
 
-def write_solution_data(result, path=OUT_FILE):
-    payload = export_payload(result)
+def export_payload(astar_result, dfs_result):
+    algorithms = [
+        solution_entry(astar_result, "astar", "A*", "Optimal search using f(n) = g(n) + h(n)"),
+        solution_entry(dfs_result, "dfs", "DFS", "Depth-first search (stack order, not optimal)"),
+    ]
+    return {
+        "grid": {"width": WIDTH, "height": HEIGHT},
+        "warehouse": list(WAREHOUSE),
+        "start": list(START),
+        "maxLoad": MAX_LOAD,
+        "optimalCost": astar_result.node.g,
+        "defaultAlgorithm": "astar",
+        "items": item_rows(ITEMS),
+        "targets": target_rows(TARGETS),
+        "algorithms": algorithms,
+    }
+
+
+def write_solution_data(astar_result, dfs_result, path=OUT_FILE):
+    payload = export_payload(astar_result, dfs_result)
     text = "window.FLOWER_ROBOT_DATA = " + json.dumps(payload, ensure_ascii=False, indent=2) + ";\n"
     with open(path, "w", encoding="utf-8") as file:
         file.write(text)
